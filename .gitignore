@@ -1,0 +1,16 @@
+# Build output
+target/
+build/
+.gradle/
+dependency-reduced-pom.xml
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+
+# UX-review captures (CLAUDE.md UX REVIEW step) - local artifacts, never committed
+Design/captures/

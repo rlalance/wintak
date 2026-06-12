@@ -1,0 +1,30 @@
+/* WinTAK dark neutrals - 1:1 from the specimen sheet [data-theme="dark"]. */
+
+.root {
+  -wintak-bg: rgb(20, 20, 21);
+  -wintak-surface-1: rgb(31, 31, 31);
+  -wintak-surface-2: rgb(37, 37, 38);
+  -wintak-surface-3: rgb(45, 45, 48);
+  -wintak-surface-raised: rgb(62, 62, 66);
+  -wintak-field-bg: rgb(0, 0, 0);
+  -wintak-border: rgb(63, 63, 70);
+  -wintak-border-strong: rgb(105, 105, 105);
+  -wintak-border-neutral: rgb(153, 153, 153);
+  -wintak-text: rgb(244, 244, 244);
+  -wintak-text-dim: rgb(202, 202, 202);
+  -wintak-text-mute: rgb(153, 153, 153);
+  -wintak-text-faint: rgb(105, 105, 105);
+  -wintak-disabled-fill: rgb(128, 128, 128);
+  -wintak-disabled-border: rgb(107, 107, 107);
+  -wintak-disabled-text: rgb(75, 75, 78);
+  -wintak-row-alt: rgb(31, 31, 31);
+  -wintak-hover-tint: rgba(255, 255, 255, 0.05);
+  -wintak-code-bg: rgb(0, 0, 0);
+  -wintak-selection-tint: rgb(37, 66, 81);
+  -wintak-shadow: rgba(0, 0, 0, 0.6);
+
+  -fx-base: rgb(45, 45, 48);
+  -fx-background: -wintak-bg;
+  -fx-control-inner-background: -wintak-field-bg;
+  -fx-text-background-color: -wintak-text;
+}

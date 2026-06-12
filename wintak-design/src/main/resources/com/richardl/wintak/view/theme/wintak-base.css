@@ -1,0 +1,1321 @@
+/* =====================================================================
+   WinTAK Design System - shared (theme-invariant) tokens
+   Source of truth: Design/WinTAK Specimen Sheet (standalone).html
+   (tokens reconstructed 1:1 from the WinTAK Figma component library).
+   Neutrals live in wintak-dark.css / wintak-light.css; exactly one of
+   those is loaded after this sheet (see view.theme.Theme).
+
+   RESERVED / SEMANTIC COLOURS - never spend these on decorative chrome:
+     -wintak-accent*  : selection, focus, primary action only
+     -wintak-success* : positive status only
+     -wintak-warning* : caution status only
+     -wintak-error*   : failure / destructive only
+     -wintak-maroon*  : application brand bar only
+
+   SHAPE & DENSITY (specimen scale - use these literals, no others):
+     radii: 0 / 1 / 3 / 4 px (4px is the cap; the sanctioned exception is
+     999px for fully-round pills/chips/counters, per the specimen sheet)
+     base type: 13px Segoe UI; numbers/dates/durations/ids in Cascadia Code
+   ===================================================================== */
+
+.root {
+  -wintak-accent: rgb(33, 127, 228);
+  -wintak-accent-2: rgb(71, 123, 255);
+  -wintak-accent-hover: rgb(126, 180, 234);
+  -wintak-accent-focus: rgb(86, 157, 229);
+  -wintak-check: rgb(45, 218, 255);
+  -wintak-success: rgb(56, 187, 131);
+  -wintak-success-bg: rgb(140, 229, 98);
+  -wintak-warning: rgb(251, 198, 47);
+  -wintak-warning-bg: rgb(233, 193, 90);
+  -wintak-error: rgb(193, 42, 42);
+  -wintak-error-bg: rgb(234, 87, 87);
+  -wintak-maroon: rgb(92, 23, 24);
+  -wintak-maroon-accent: rgb(159, 22, 44);
+
+  /* pressed/hover shades and fixed-ink surfaces, 1:1 from the specimen sheet */
+  -wintak-accent-pressed: rgb(24, 98, 180);
+  -wintak-error-hover: rgb(214, 58, 58);
+  -wintak-error-pressed: rgb(160, 30, 30);
+  -wintak-visited: rgb(150, 110, 200);
+  -wintak-snackbar-neutral: rgb(212, 212, 212);
+  -wintak-on-snackbar: rgb(0, 0, 0);
+
+  -fx-font-family: "Segoe UI";
+  -fx-font-size: 13px;
+}
+
+/* Typography role: anything read carefully (numbers, dates, durations, ids).
+   ONE family only - JavaFX has no fallback lists (MonoFontTest enforces this).
+   Consolas, not Cascadia Code: Windows ships Cascadia as a VARIABLE ttf and JavaFX
+   mis-maps variable-font glyph ids, rendering garbage (verified by screenshot 2026-06-11).
+   Revisit only by bundling a static Cascadia build via Font.loadFont. */
+.wintak-mono {
+  -fx-font-family: "Consolas";
+}
+
+/* Typography roles (specimen type ramp). Inter/Rajdhani are not bundled;
+   Segoe UI carries the display roles until a Font.loadFont bundle lands. */
+.wintak-display-1 {
+  -fx-font-size: 30px;
+  -fx-font-weight: bold;
+}
+
+.wintak-display-2 {
+  -fx-font-size: 18px;
+}
+
+.wintak-title {
+  -fx-font-size: 14px;
+}
+
+.wintak-strong {
+  -fx-font-weight: bold;
+}
+
+.wintak-caption {
+  -fx-font-size: 11px;
+}
+
+.wintak-dense {
+  -fx-font-size: 10px;
+}
+
+/* =====================================================================
+   CHROME - all rules reference tokens only (specimen: topbar = maroon
+   brand bar, panels = surface scale, selection = accent).
+   ===================================================================== */
+
+.root {
+  -wintak-on-brand: rgb(255, 255, 255); /* specimen topbar text */
+  -fx-background-color: -wintak-bg;
+}
+
+/* menu bar = the brand bar; menus sit flat on the maroon (the generic
+   .menu-button plate below must not leak in here) */
+.menu-bar {
+  -fx-background-color: -wintak-maroon;
+}
+
+.menu-bar > .container > .menu-button {
+  -fx-background-color: transparent, transparent;
+  -fx-background-insets: 0, 0;
+}
+
+.menu-bar > .container > .menu-button > .label {
+  -fx-text-fill: -wintak-on-brand;
+}
+
+.menu-bar > .container > .menu-button:hover,
+.menu-bar > .container > .menu-button:showing {
+  -fx-background-color: -wintak-maroon-accent;
+}
+
+.context-menu {
+  -fx-background-color: -wintak-surface-raised;
+  -fx-border-color: -wintak-border;
+  -fx-background-radius: 3px;
+  -fx-border-radius: 3px;
+}
+
+.menu-item > .label {
+  -fx-text-fill: -wintak-text;
+}
+
+.menu-item:disabled > .label {
+  -fx-text-fill: -wintak-disabled-text;
+}
+
+.menu-item:focused {
+  -fx-background-color: -wintak-accent;
+}
+
+.menu-item:focused > .label {
+  -fx-text-fill: -wintak-on-brand;
+}
+
+/* left tool rail */
+.tool-bar {
+  -fx-background-color: -wintak-surface-2;
+  -fx-border-color: -wintak-border;
+}
+
+.tool-bar .toggle-button,
+.tool-bar .button {
+  -fx-background-color: transparent;
+  -fx-text-fill: -wintak-text;
+  -fx-background-radius: 3px;
+}
+
+.tool-bar .toggle-button:hover,
+.tool-bar .button:hover {
+  -fx-background-color: -wintak-hover-tint;
+}
+
+.tool-bar .toggle-button:selected {
+  -fx-background-color: -wintak-accent;
+  -fx-text-fill: -wintak-on-brand;
+}
+
+.tool-bar .ikonli-font-icon {
+  -fx-icon-color: -wintak-text;
+  -fx-icon-size: 20px;
+}
+
+.tool-bar .toggle-button:selected .ikonli-font-icon {
+  -fx-icon-color: -wintak-on-brand;
+}
+
+/* status strip */
+.status-bar {
+  -fx-background-color: -wintak-surface-2;
+  -fx-border-color: -wintak-border transparent transparent transparent;
+}
+
+.status-bar .label {
+  -fx-text-fill: -wintak-text-dim;
+}
+
+#status-dirty {
+  -fx-text-fill: -wintak-warning; /* semantic: unsaved = caution */
+}
+
+/* document area */
+#editor-area {
+  -fx-background-color: -wintak-bg;
+}
+
+/* =====================================================================
+   COMPONENT-SHEET OVERLAY (FEAT-38/45) - fullscreen specimen sheet,
+   solid themed canvas, scaffolding mirrors the Design/ HTML 1:1.
+   ===================================================================== */
+.component-sheet {
+  -fx-background-color: -wintak-bg;
+}
+
+.component-sheet .scroll-pane,
+.component-sheet .scroll-pane > .viewport {
+  -fx-background-color: transparent;
+}
+
+/* sticky maroon topbar */
+.sheet-topbar {
+  -fx-background-color: -wintak-maroon;
+  -fx-min-height: 52px;
+  -fx-padding: 0 22 0 22;
+  -fx-spacing: 16;
+  -fx-alignment: center-left;
+}
+
+.sheet-topbar .sheet-brand {
+  -fx-text-fill: -wintak-on-brand;
+  -fx-font-size: 15px;
+  -fx-font-weight: bold;
+}
+
+.sheet-topbar .sheet-brand-sub {
+  -fx-text-fill: -wintak-on-brand;
+  -fx-opacity: 0.8;
+  -fx-font-size: 12px;
+}
+
+.sheet-topbar .sheet-meta {
+  -fx-text-fill: -wintak-on-brand;
+  -fx-opacity: 0.78;
+  -fx-font-size: 11px;
+  -fx-font-family: "Consolas";
+}
+
+.sheet-theme-toggle .toggle-button {
+  -fx-background-color: transparent, transparent;
+  -fx-text-fill: -wintak-on-brand;
+  -fx-opacity: 0.8;
+  -fx-font-size: 12px;
+}
+
+.sheet-theme-toggle .toggle-button:selected {
+  -fx-background-color: -wintak-on-brand, -wintak-on-brand;
+  -fx-text-fill: -wintak-maroon;
+  -fx-font-weight: bold;
+  -fx-opacity: 1;
+}
+
+/* jump nav */
+.sheet-toc {
+  -fx-background-color: -wintak-bg;
+  -fx-border-color: transparent transparent -wintak-border transparent;
+  -fx-padding: 9 22 9 22;
+  -fx-hgap: 7;
+  -fx-vgap: 5;
+}
+
+.sheet-toc .hyperlink {
+  -fx-text-fill: -wintak-text-mute;
+  -fx-font-size: 11px;
+  -fx-border-color: -wintak-border;
+  -fx-border-radius: 999px;
+  -fx-background-radius: 999px;
+  -fx-padding: 3 9 3 9;
+  -fx-underline: false;
+}
+
+.sheet-toc .hyperlink:hover {
+  -fx-text-fill: -wintak-text;
+  -fx-border-color: -wintak-border-strong;
+  -fx-background-color: -wintak-hover-tint;
+}
+
+/* section scaffolding */
+.sheet-lede {
+  -fx-text-fill: -wintak-text-dim;
+}
+
+.sheet-h2 {
+  -fx-text-fill: -wintak-text-mute;
+  -fx-font-size: 12px;
+  -fx-font-weight: bold;
+}
+
+.sheet-rule {
+  -fx-border-color: transparent transparent -wintak-border transparent;
+  -fx-padding: 0 0 9 0;
+}
+
+.sheet-sub,
+.sheet-desc {
+  -fx-text-fill: -wintak-text-mute;
+  -fx-font-size: 12px;
+}
+
+.sheet-sub {
+  -fx-text-fill: -wintak-text-dim;
+}
+
+.sheet-h3 {
+  -fx-font-size: 15px;
+  -fx-font-weight: bold;
+}
+
+.sheet-panel {
+  -fx-background-color: -wintak-surface-1;
+  -fx-border-color: -wintak-border;
+  -fx-background-radius: 3px;
+  -fx-border-radius: 3px;
+  -fx-padding: 20;
+}
+
+.sheet-cap {
+  -fx-text-fill: -wintak-text-mute;
+  -fx-font-size: 10px;
+  -fx-font-family: "Consolas";
+}
+
+/* state matrix: header/label cells on surface-3, specimen cells on surface-1 */
+.sheet-matrix {
+  -fx-background-color: -wintak-border;
+  -fx-border-color: -wintak-border;
+  -fx-hgap: 1;
+  -fx-vgap: 1;
+}
+
+.sheet-mh {
+  -fx-background-color: -wintak-surface-3;
+  -fx-text-fill: -wintak-text-mute;
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+  -fx-padding: 8 10 8 10;
+}
+
+.sheet-ml {
+  -fx-background-color: -wintak-surface-3;
+  -fx-text-fill: -wintak-text-dim;
+  -fx-font-size: 12px;
+  -fx-padding: 10 12 10 12;
+}
+
+.sheet-mc {
+  -fx-background-color: -wintak-surface-1;
+  -fx-min-height: 58px;
+  -fx-padding: 14 12 14 12;
+  -fx-alignment: center;
+}
+
+/* token swatches */
+.sheet-swatch {
+  -fx-background-color: -wintak-surface-2;
+  -fx-border-color: -wintak-border;
+  -fx-background-radius: 3px;
+  -fx-border-radius: 3px;
+}
+
+.sheet-swatch-chip {
+  -fx-min-height: 54px;
+  -fx-pref-width: 168px;
+}
+
+.sheet-swatch-name {
+  -fx-font-size: 11px;
+  -fx-font-weight: bold;
+}
+
+.sheet-swatch-token {
+  -fx-text-fill: -wintak-text-mute;
+  -fx-font-size: 10px;
+  -fx-font-family: "Consolas";
+}
+
+.sheet-swatch-role {
+  -fx-text-fill: -wintak-text-faint;
+  -fx-font-size: 10px;
+}
+
+/* one chip class per token so swatches never inline a style */
+.sw-bg { -fx-background-color: -wintak-bg; }
+.sw-surface-1 { -fx-background-color: -wintak-surface-1; }
+.sw-surface-2 { -fx-background-color: -wintak-surface-2; }
+.sw-surface-3 { -fx-background-color: -wintak-surface-3; }
+.sw-surface-raised { -fx-background-color: -wintak-surface-raised; }
+.sw-field-bg { -fx-background-color: -wintak-field-bg; }
+.sw-border { -fx-background-color: -wintak-border; }
+.sw-border-strong { -fx-background-color: -wintak-border-strong; }
+.sw-border-neutral { -fx-background-color: -wintak-border-neutral; }
+.sw-text { -fx-background-color: -wintak-text; }
+.sw-text-dim { -fx-background-color: -wintak-text-dim; }
+.sw-text-mute { -fx-background-color: -wintak-text-mute; }
+.sw-disabled-fill { -fx-background-color: -wintak-disabled-fill; }
+.sw-disabled-border { -fx-background-color: -wintak-disabled-border; }
+.sw-accent { -fx-background-color: -wintak-accent; }
+.sw-accent-2 { -fx-background-color: -wintak-accent-2; }
+.sw-accent-hover { -fx-background-color: -wintak-accent-hover; }
+.sw-accent-focus { -fx-background-color: -wintak-accent-focus; }
+.sw-check { -fx-background-color: -wintak-check; }
+.sw-success { -fx-background-color: -wintak-success; }
+.sw-success-bg { -fx-background-color: -wintak-success-bg; }
+.sw-warning { -fx-background-color: -wintak-warning; }
+.sw-warning-bg { -fx-background-color: -wintak-warning-bg; }
+.sw-error { -fx-background-color: -wintak-error; }
+.sw-error-bg { -fx-background-color: -wintak-error-bg; }
+.sw-maroon { -fx-background-color: -wintak-maroon; }
+.sw-maroon-accent { -fx-background-color: -wintak-maroon-accent; }
+
+/* foundation demo boxes */
+.sheet-scale-accent {
+  -fx-background-color: -wintak-accent;
+}
+
+.sheet-scale-surface {
+  -fx-background-color: -wintak-surface-3;
+  -fx-border-color: -wintak-border-strong;
+}
+
+.sheet-radius-0 { -fx-background-color: -wintak-surface-3; -fx-border-color: -wintak-border-strong; }
+.sheet-radius-1 { -fx-background-color: -wintak-surface-3; -fx-border-color: -wintak-border-strong; -fx-background-radius: 1px; -fx-border-radius: 1px; }
+.sheet-radius-3 { -fx-background-color: -wintak-surface-3; -fx-border-color: -wintak-border-strong; -fx-background-radius: 3px; -fx-border-radius: 3px; }
+.sheet-radius-4 { -fx-background-color: -wintak-surface-3; -fx-border-color: -wintak-border-strong; -fx-background-radius: 4px; -fx-border-radius: 4px; }
+
+.sheet-border-hairline { -fx-background-color: -wintak-surface-2; -fx-border-color: -wintak-border-strong; -fx-border-width: 0.5px; }
+.sheet-border-structural { -fx-background-color: -wintak-surface-2; -fx-border-color: -wintak-border-strong; -fx-border-width: 1px; }
+.sheet-border-interactive { -fx-background-color: -wintak-surface-2; -fx-border-color: -wintak-border-strong; -fx-border-width: 2px; }
+
+/* elevation demos */
+.sheet-elev-flat {
+  -fx-background-color: -wintak-surface-2;
+  -fx-border-color: -wintak-border;
+  -fx-background-radius: 3px;
+  -fx-border-radius: 3px;
+}
+
+.sheet-elev-card {
+  -fx-background-color: -wintak-surface-2;
+  -fx-border-color: -wintak-border-strong;
+  -fx-background-radius: 3px;
+  -fx-border-radius: 3px;
+}
+
+.sheet-elev-popover {
+  -fx-background-color: -wintak-surface-2;
+  -fx-background-radius: 3px;
+  -fx-effect: dropshadow(gaussian, -wintak-shadow, 20, 0, 0, 6);
+}
+
+.sheet-elev-window {
+  -fx-background-color: -wintak-surface-2;
+  -fx-background-radius: 3px;
+  -fx-effect: dropshadow(gaussian, -wintak-shadow, 18, 0, 8, 8);
+}
+
+/* stroke-based specimen icons */
+.sheet-icon {
+  -fx-fill: transparent;
+  -fx-stroke: -wintak-text;
+  -fx-stroke-width: 1.7;
+  -fx-stroke-line-cap: round;
+  -fx-stroke-line-join: round;
+}
+
+.sheet-icon-dim {
+  -fx-stroke: -wintak-text-dim;
+}
+
+.sheet-icon-ink {
+  -fx-stroke: -wintak-on-snackbar;
+}
+
+.sheet-icon-brand {
+  -fx-stroke: -wintak-on-brand;
+}
+
+/* style-reference tooltip: the selector devs copy into code */
+.style-ref-tip {
+  -fx-font-family: "Consolas";
+  -fx-font-size: 11px;
+}
+
+/* gantt chart */
+.timeline-header {
+  -fx-background-color: -wintak-surface-2;
+  -fx-border-color: transparent transparent -wintak-border transparent;
+}
+
+.timeline-header .week-label {
+  -fx-text-fill: -wintak-text-dim;
+}
+
+.timeline-header .day-label {
+  -fx-text-fill: -wintak-text-mute;
+  -fx-font-size: 10px;
+}
+
+.bar-canvas {
+  -fx-background-color: -wintak-bg;
+}
+
+.task-bar {
+  -fx-background-color: -wintak-accent-2;
+  -fx-background-radius: 3px;
+}
+
+.task-bar-progress {
+  -fx-background-color: -wintak-accent;
+  -fx-background-radius: 3px 0 0 3px;
+}
+
+.task-bar.selected {
+  -fx-border-color: -wintak-accent-focus;
+  -fx-border-width: 2px;
+  -fx-border-radius: 3px;
+}
+
+.milestone-diamond {
+  -fx-fill: -wintak-accent;
+  -fx-stroke: -wintak-accent-2;
+  -fx-stroke-width: 1.5;
+}
+
+.milestone-diamond.selected {
+  -fx-stroke: -wintak-accent-focus;
+  -fx-stroke-width: 2;
+}
+
+.dependency-arrow {
+  -fx-stroke: -wintak-border-neutral;
+  -fx-stroke-width: 1.5;
+  -fx-fill: transparent;
+}
+
+.dependency-arrow.selected {
+  -fx-stroke: -wintak-accent;
+  -fx-stroke-width: 2;
+}
+
+/* =====================================================================
+   CONTROLS - full component coverage per the specimen sheet. Modena
+   derivation hooks first (selection, focus, marks), then explicit
+   rules. Tokens only; no literals.
+   ===================================================================== */
+
+.root {
+  -fx-accent: -wintak-accent;
+  -fx-focus-color: -wintak-accent-focus;
+  -fx-faint-focus-color: transparent;
+  -fx-selection-bar: -wintak-accent;
+  -fx-selection-bar-non-focused: -wintak-surface-raised;
+}
+
+/* buttons: surface-2 plate, 1px inset border, accent for the default button */
+.button,
+.toggle-button,
+.menu-button,
+.split-menu-button {
+  -fx-background-color: -wintak-border, -wintak-surface-2;
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 1px;
+  -fx-text-fill: -wintak-text;
+}
+
+/* specimen hover/press: a vertical field-bg -> border-strong wash */
+.button:hover,
+.toggle-button:hover,
+.menu-button:hover,
+.split-menu-button:hover {
+  -fx-background-color: -wintak-border-strong,
+      linear-gradient(to bottom, -wintak-field-bg, -wintak-border-strong);
+  -fx-background-insets: 0, 1;
+  -fx-text-fill: -wintak-on-brand;
+}
+
+.button:armed,
+.toggle-button:armed {
+  -fx-background-color: -wintak-border-strong,
+      linear-gradient(to top, -wintak-field-bg, -wintak-border-strong);
+  -fx-background-insets: 0, 1;
+  -fx-text-fill: -wintak-on-brand;
+}
+
+.button:focused,
+.toggle-button:focused {
+  -fx-background-color: -wintak-accent-focus, -wintak-surface-2;
+  -fx-background-insets: 0, 1;
+}
+
+.button:default {
+  -fx-background-color: -wintak-accent, -wintak-accent;
+  -fx-text-fill: -wintak-on-brand;
+}
+
+.button:default:hover {
+  -fx-background-color: -wintak-accent-focus, -wintak-accent-focus;
+}
+
+.button:default:armed {
+  -fx-background-color: -wintak-accent-pressed, -wintak-accent-pressed;
+}
+
+/* destructive variant: reserved error red */
+.button.destructive {
+  -fx-background-color: -wintak-error, -wintak-error;
+  -fx-text-fill: -wintak-on-brand;
+}
+
+.button.destructive:hover {
+  -fx-background-color: -wintak-error-hover, -wintak-error-hover;
+}
+
+.button.destructive:armed {
+  -fx-background-color: -wintak-error-pressed, -wintak-error-pressed;
+}
+
+.button.destructive:disabled {
+  -fx-background-color: -wintak-disabled-border, -wintak-disabled-fill;
+  -fx-text-fill: -wintak-disabled-text;
+}
+
+/* tertiary / text button */
+.button.tertiary {
+  -fx-background-color: transparent, transparent;
+  -fx-text-fill: -wintak-accent;
+}
+
+.button.tertiary:hover {
+  -fx-background-color: transparent, -wintak-hover-tint;
+  -fx-text-fill: -wintak-accent-focus;
+}
+
+.button.tertiary:focused {
+  -fx-background-color: -wintak-accent-focus, transparent;
+  -fx-text-fill: -wintak-accent;
+}
+
+.button.tertiary:disabled {
+  -fx-background-color: transparent, transparent;
+  -fx-text-fill: -wintak-disabled-text;
+}
+
+/* icon button: field-bg well, 2px strong inset */
+.button.icon-button {
+  -fx-background-color: -wintak-border-strong, -wintak-field-bg;
+  -fx-background-insets: 0, 2;
+  -fx-padding: 0;
+}
+
+.button.icon-button:hover {
+  -fx-background-color: -wintak-border-strong,
+      linear-gradient(to bottom, -wintak-field-bg, -wintak-border-strong);
+}
+
+.button.icon-button:armed {
+  -fx-background-color: -wintak-border-strong,
+      linear-gradient(to top, -wintak-field-bg, -wintak-border-strong);
+}
+
+.button.icon-button:disabled {
+  -fx-background-color: -wintak-disabled-border, -wintak-disabled-fill;
+}
+
+/* ribbon command button: icon over label, accent tint when toggled */
+.toggle-button.ribbon-button {
+  -fx-content-display: top;
+  -fx-graphic-text-gap: 5;
+  -fx-font-size: 11px;
+  -fx-padding: 7 4 5 4;
+}
+
+.toggle-button.ribbon-button:selected {
+  -fx-background-color: -wintak-accent-focus, -wintak-selection-tint;
+  -fx-background-insets: 0, 1;
+  -fx-text-fill: -wintak-text;
+}
+
+.toggle-button:selected {
+  -fx-background-color: -wintak-accent, -wintak-accent;
+  -fx-text-fill: -wintak-on-brand;
+}
+
+.button:disabled,
+.toggle-button:disabled,
+.menu-button:disabled,
+.split-menu-button:disabled {
+  -fx-background-color: -wintak-disabled-border, -wintak-disabled-fill;
+  -fx-text-fill: -wintak-disabled-text;
+  -fx-opacity: 1;
+}
+
+.hyperlink {
+  -fx-text-fill: -wintak-accent;
+  -fx-border-color: transparent;
+}
+
+.hyperlink:hover {
+  -fx-text-fill: -wintak-accent-focus;
+  -fx-underline: true;
+}
+
+.hyperlink:visited {
+  -fx-text-fill: -wintak-visited;
+}
+
+.hyperlink:focused {
+  -fx-border-color: -wintak-accent-focus;
+}
+
+.hyperlink:disabled {
+  -fx-text-fill: -wintak-disabled-text;
+  -fx-opacity: 1;
+}
+
+/* selection marks: radio dot follows text, check mark is the reserved cyan */
+.radio-button > .radio,
+.check-box > .box {
+  -fx-background-color: -wintak-border-neutral, -wintak-field-bg;
+  -fx-background-insets: 0, 1;
+}
+
+.radio-button:selected > .radio > .dot {
+  -fx-background-color: -wintak-text;
+}
+
+.check-box:selected > .box > .mark,
+.check-box:indeterminate > .box > .mark {
+  -fx-background-color: -wintak-check;
+}
+
+/* text input: field-bg well with the specimen's 1px-top / 2px-sides+bottom frame */
+.text-input {
+  -fx-background-color: -wintak-border, -wintak-field-bg;
+  -fx-background-insets: 0, 1 2 2 2;
+  -fx-background-radius: 0;
+  -fx-text-fill: -wintak-text;
+  -fx-prompt-text-fill: -wintak-text-mute;
+  -fx-highlight-fill: -wintak-accent;
+  -fx-highlight-text-fill: -wintak-on-brand;
+}
+
+.text-input:hover {
+  -fx-background-color: -wintak-accent-hover, -wintak-field-bg;
+}
+
+.text-input:focused {
+  -fx-background-color: -wintak-accent-focus, -wintak-field-bg;
+}
+
+.text-input:disabled {
+  -fx-background-color: -wintak-disabled-border, -wintak-disabled-fill;
+  -fx-text-fill: -wintak-disabled-text;
+  -fx-opacity: 1;
+}
+
+/* invalid entry: stroke flips to the reserved error red */
+.text-input.error,
+.text-input.error:hover,
+.text-input.error:focused,
+.combo-box.error,
+.choice-box.error {
+  -fx-background-color: -wintak-error, -wintak-field-bg;
+}
+
+/* non-editable: structural stroke, dim text on surface-3 */
+.text-input:readonly {
+  -fx-background-color: -wintak-border, -wintak-surface-3;
+  -fx-text-fill: -wintak-text-dim;
+}
+
+.wintak-field-msg {
+  -fx-text-fill: -wintak-error;
+  -fx-font-size: 11px;
+  -fx-font-weight: bold;
+}
+
+.wintak-field-hint {
+  -fx-text-fill: -wintak-text-mute;
+  -fx-font-size: 11px;
+}
+
+/* search field: rounded strong-stroke well with a leading glyph */
+.wintak-search {
+  -fx-background-color: -wintak-border-strong, -wintak-field-bg;
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 4px;
+  -fx-padding: 0 9 0 9;
+  -fx-spacing: 7;
+  -fx-alignment: center-left;
+  -fx-min-height: 28px;
+}
+
+.wintak-search:focus-within {
+  -fx-background-color: -wintak-accent-focus, -wintak-field-bg;
+}
+
+.wintak-search.disabled {
+  -fx-background-color: -wintak-disabled-border, -wintak-disabled-fill;
+}
+
+.wintak-search .text-field {
+  -fx-background-color: transparent, transparent;
+  -fx-background-insets: 0, 0;
+  -fx-padding: 2 0 2 0;
+}
+
+.text-area .content {
+  -fx-background-color: -wintak-field-bg;
+}
+
+/* pickers and dropdowns share the field frame */
+.combo-box,
+.choice-box,
+.date-picker,
+.color-picker,
+.spinner {
+  -fx-background-color: -wintak-border, -wintak-field-bg;
+  -fx-background-insets: 0, 1 2 2 2;
+  -fx-background-radius: 0;
+}
+
+.combo-box:hover,
+.choice-box:hover,
+.date-picker:hover,
+.color-picker:hover,
+.spinner:hover {
+  -fx-background-color: -wintak-accent-hover, -wintak-field-bg;
+}
+
+.combo-box:focused,
+.choice-box:focused,
+.date-picker:focused,
+.color-picker:focused,
+.spinner:focused {
+  -fx-background-color: -wintak-accent-focus, -wintak-field-bg;
+}
+
+.combo-box .list-cell,
+.choice-box .label,
+.date-picker .text-field,
+.spinner .text-field {
+  -fx-text-fill: -wintak-text;
+  -fx-background-color: transparent;
+}
+
+.combo-box .arrow,
+.choice-box .arrow,
+.spinner .increment-arrow,
+.spinner .decrement-arrow {
+  -fx-background-color: -wintak-text-dim;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button,
+.combo-box .arrow-button,
+.date-picker .arrow-button {
+  -fx-background-color: -wintak-surface-3;
+}
+
+/* slider: border-strong rail, text-coloured thumb, accent fill */
+.slider .track {
+  -fx-background-color: -wintak-border-strong;
+}
+
+.slider .thumb {
+  -fx-background-color: -wintak-text;
+}
+
+.slider:focused .thumb {
+  -fx-background-color: -wintak-text, -wintak-text;
+  -fx-effect: dropshadow(gaussian, -wintak-accent-focus, 4, 0.8, 0, 0);
+}
+
+/* progress: surface-3 track, accent fill */
+.progress-bar > .track {
+  -fx-background-color: -wintak-surface-3;
+}
+
+.progress-bar > .bar {
+  -fx-background-color: -wintak-accent;
+  -fx-background-insets: 1;
+}
+
+.progress-indicator {
+  -fx-progress-color: -wintak-accent;
+}
+
+/* virtualised controls: field-bg wells, row-alt zebra, accent selection */
+.list-view,
+.tree-view,
+.table-view {
+  -fx-background-color: -wintak-border, -wintak-field-bg;
+  -fx-background-insets: 0, 1;
+}
+
+.list-cell,
+.tree-cell,
+.table-row-cell {
+  -fx-background-color: -wintak-field-bg;
+  -fx-text-fill: -wintak-text;
+}
+
+.list-cell:odd,
+.table-row-cell:odd {
+  -fx-background-color: -wintak-row-alt;
+}
+
+/* specimen selection: accent-focus inset frame on the selection tint */
+.list-cell:filled:selected,
+.tree-cell:filled:selected,
+.table-row-cell:filled:selected {
+  -fx-background-color: -wintak-accent-focus, -wintak-selection-tint;
+  -fx-background-insets: 0, 1;
+  -fx-text-fill: -wintak-text;
+}
+
+.list-cell:filled:hover,
+.tree-cell:filled:hover,
+.table-row-cell:filled:hover {
+  -fx-background-color: -wintak-hover-tint;
+  -fx-text-fill: -wintak-text;
+}
+
+.list-cell:filled:selected:hover,
+.tree-cell:filled:selected:hover,
+.table-row-cell:filled:selected:hover {
+  -fx-background-color: -wintak-accent-focus, -wintak-selection-tint;
+  -fx-background-insets: 0, 1;
+}
+
+.table-view .column-header,
+.table-view .column-header-background,
+.table-view .filler {
+  -fx-background-color: -wintak-surface-3;
+}
+
+.table-view .column-header .label {
+  -fx-text-fill: -wintak-text-dim;
+}
+
+/* tabs: surface-3 strip, selected tab rises to surface-1 with an accent line */
+.tab-pane > .tab-header-area > .tab-header-background {
+  -fx-background-color: -wintak-surface-3;
+}
+
+.tab-pane .tab {
+  -fx-background-color: -wintak-surface-3;
+  -fx-background-radius: 0;
+}
+
+.tab-pane .tab:selected {
+  -fx-background-color: -wintak-accent, -wintak-surface-1;
+  -fx-background-insets: 0 0 0 0, 0 0 2 0;
+}
+
+.tab-pane .tab .tab-label {
+  -fx-text-fill: -wintak-text-dim;
+}
+
+.tab-pane .tab:selected .tab-label {
+  -fx-text-fill: -wintak-text;
+}
+
+/* titled pane / accordion */
+.titled-pane > .title {
+  -fx-background-color: -wintak-surface-3;
+  -fx-text-fill: -wintak-text;
+}
+
+.titled-pane > *.content {
+  -fx-background-color: -wintak-surface-1;
+  -fx-border-color: -wintak-border;
+}
+
+/* pagination */
+.pagination .number-button,
+.pagination .bullet-button {
+  -fx-background-color: transparent;
+  -fx-text-fill: -wintak-text-dim;
+}
+
+.pagination .number-button:selected {
+  -fx-background-color: -wintak-accent;
+  -fx-text-fill: -wintak-on-brand;
+}
+
+/* scrollbars: surface-3 track, border-strong thumb inset like the specimen */
+.scroll-bar {
+  -fx-background-color: -wintak-surface-3;
+}
+
+.scroll-bar .track {
+  -fx-background-color: -wintak-surface-3;
+}
+
+.scroll-bar .thumb {
+  -fx-background-color: -wintak-border-strong;
+  -fx-background-insets: 3;
+  -fx-background-radius: 4px;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+  -fx-background-color: -wintak-surface-3;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+  -fx-background-color: -wintak-text-mute;
+}
+
+.scroll-pane,
+.scroll-pane > .viewport {
+  -fx-background-color: transparent;
+}
+
+/* separators and tooltips */
+.separator .line {
+  -fx-border-color: -wintak-border;
+}
+
+.tooltip {
+  -fx-background-color: -wintak-surface-raised;
+  -fx-text-fill: -wintak-text;
+  -fx-background-radius: 3px;
+  -fx-border-color: -wintak-border;
+  -fx-border-radius: 3px;
+}
+
+/* combo/choice popup options follow the menu hover tint */
+.combo-box-popup .list-view .list-cell:filled:hover,
+.choice-box .context-menu .menu-item:focused {
+  -fx-background-color: -wintak-selection-tint;
+  -fx-text-fill: -wintak-text;
+}
+
+/* =====================================================================
+   DESIGN-SYSTEM COMPONENT CLASSES - specimen-sheet parity (FEAT-45).
+   Reusable app classes first, sheet-only mock scaffolding after.
+   ===================================================================== */
+
+/* segmented control: strong-stroke shell, accent active segment */
+.wintak-seg {
+  -fx-background-color: -wintak-border-strong, -wintak-field-bg;
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 4px;
+  -fx-padding: 1;
+  -fx-alignment: center-left;
+}
+
+.wintak-seg .toggle-button {
+  -fx-background-color: transparent, transparent;
+  -fx-background-radius: 3px;
+  -fx-text-fill: -wintak-text-dim;
+  -fx-font-size: 12px;
+  -fx-padding: 6 13 6 13;
+}
+
+.wintak-seg .toggle-button:hover {
+  -fx-background-color: transparent, -wintak-hover-tint;
+  -fx-text-fill: -wintak-text;
+}
+
+.wintak-seg .toggle-button:selected {
+  -fx-background-color: -wintak-accent, -wintak-accent;
+  -fx-text-fill: -wintak-on-brand;
+}
+
+/* chips / tags */
+.wintak-chip {
+  -fx-background-color: -wintak-border-strong, -wintak-surface-2;
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 999px;
+  -fx-text-fill: -wintak-text;
+  -fx-font-size: 11px;
+  -fx-padding: 3 9 3 9;
+}
+
+.wintak-chip-accent {
+  -fx-background-color: -wintak-accent-focus, -wintak-selection-tint;
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 999px;
+  -fx-text-fill: -wintak-accent-hover;
+  -fx-font-size: 11px;
+  -fx-padding: 3 9 3 9;
+}
+
+/* status badges: dot + label, semantic ink only */
+.wintak-badge {
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+  -fx-graphic-text-gap: 5;
+}
+
+.wintak-badge-dot {
+  -fx-background-radius: 999px;
+  -fx-min-width: 8px;
+  -fx-min-height: 8px;
+  -fx-max-width: 8px;
+  -fx-max-height: 8px;
+}
+
+.wintak-badge.success { -fx-text-fill: -wintak-success; }
+.wintak-badge.success .wintak-badge-dot { -fx-background-color: -wintak-success; }
+.wintak-badge.warning { -fx-text-fill: -wintak-warning; }
+.wintak-badge.warning .wintak-badge-dot { -fx-background-color: -wintak-warning; }
+.wintak-badge.error { -fx-text-fill: -wintak-error-bg; }
+.wintak-badge.error .wintak-badge-dot { -fx-background-color: -wintak-error-bg; }
+.wintak-badge.neutral { -fx-text-fill: -wintak-text-mute; }
+.wintak-badge.neutral .wintak-badge-dot { -fx-background-color: -wintak-text-mute; }
+
+/* solid status pills: black ink on the semantic fills */
+.wintak-pill {
+  -fx-text-fill: -wintak-on-snackbar;
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+  -fx-background-radius: 3px;
+  -fx-padding: 2 7 2 7;
+}
+
+.wintak-pill.success { -fx-background-color: -wintak-success-bg; }
+.wintak-pill.warning { -fx-background-color: -wintak-warning-bg; }
+.wintak-pill.error { -fx-background-color: -wintak-error-bg; }
+.wintak-pill.info { -fx-background-color: -wintak-accent; -fx-text-fill: -wintak-on-brand; }
+
+/* count badge */
+.wintak-counter {
+  -fx-background-color: -wintak-error-bg;
+  -fx-background-radius: 999px;
+  -fx-text-fill: -wintak-on-snackbar;
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+  -fx-padding: 1 5 1 5;
+  -fx-min-width: 17px;
+  -fx-alignment: center;
+}
+
+/* snackbars: solid tinted toast, fixed dark ink */
+.wintak-snackbar {
+  -fx-background-radius: 4px;
+  -fx-padding: 8 12 8 12;
+  -fx-spacing: 9;
+  -fx-alignment: center-left;
+  -fx-min-height: 34px;
+}
+
+.wintak-snackbar .label {
+  -fx-text-fill: -wintak-on-snackbar;
+  -fx-font-size: 12px;
+}
+
+.wintak-snackbar.normal { -fx-background-color: -wintak-snackbar-neutral; }
+.wintak-snackbar.success { -fx-background-color: -wintak-success-bg; }
+.wintak-snackbar.warning { -fx-background-color: -wintak-warning-bg; }
+.wintak-snackbar.error { -fx-background-color: -wintak-error-bg; }
+
+/* dividers */
+.wintak-divider {
+  -fx-background-color: -wintak-border-strong;
+  -fx-min-height: 1px;
+  -fx-max-height: 1px;
+}
+
+.wintak-divider-soft {
+  -fx-background-color: -wintak-border;
+  -fx-min-height: 1px;
+  -fx-max-height: 1px;
+}
+
+.wintak-divider-maroon {
+  -fx-background-color: -wintak-maroon-accent;
+  -fx-min-height: 3px;
+  -fx-max-height: 3px;
+  -fx-effect: dropshadow(gaussian, -wintak-shadow, 9, 0, -6, 6);
+}
+
+.wintak-divider-v {
+  -fx-background-color: -wintak-border-strong;
+  -fx-min-width: 1px;
+  -fx-max-width: 1px;
+}
+
+.wintak-dotted-rail {
+  -fx-border-color: -wintak-border-strong transparent transparent transparent;
+  -fx-border-style: dotted;
+  -fx-border-width: 2 0 0 0;
+  -fx-min-height: 5px;
+}
+
+/* groupbox: notched container border with a floating bold title */
+.wintak-groupbox {
+  -fx-border-color: -wintak-border;
+  -fx-padding: 18 12 12 12;
+}
+
+.wintak-groupbox-title {
+  -fx-background-color: -wintak-surface-1;
+  -fx-font-weight: bold;
+  -fx-font-size: 12px;
+  -fx-padding: 0 5 0 5;
+}
+
+/* dockpane (boxed) tab variant */
+.dockpane-tabs .tab-header-area .tab-header-background {
+  -fx-background-color: -wintak-surface-3;
+}
+
+.dockpane-tabs .tab {
+  -fx-background-color: -wintak-border, -wintak-surface-3;
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 0;
+}
+
+.dockpane-tabs .tab:selected {
+  -fx-background-color: -wintak-border, -wintak-surface-2;
+  -fx-background-insets: 0, 1;
+}
+
+/* ---------- sheet-only mocks (popup surfaces can't embed statically) ---------- */
+
+/* context-menu / popover card */
+.sheet-menu-card {
+  -fx-background-color: -wintak-border-strong, -wintak-surface-2;
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 3px;
+  -fx-padding: 4;
+  -fx-spacing: 1;
+  -fx-effect: dropshadow(gaussian, -wintak-shadow, 20, 0, 0, 6);
+}
+
+.sheet-menu-row {
+  -fx-padding: 6 9 6 9;
+  -fx-spacing: 9;
+  -fx-alignment: center-left;
+  -fx-background-radius: 2px;
+}
+
+.sheet-menu-row .label {
+  -fx-text-fill: -wintak-text;
+  -fx-font-size: 12px;
+}
+
+.sheet-menu-row.hover {
+  -fx-background-color: -wintak-selection-tint;
+}
+
+.sheet-menu-row.selected {
+  -fx-background-color: -wintak-accent;
+}
+
+.sheet-menu-row.selected .label {
+  -fx-text-fill: -wintak-on-brand;
+}
+
+.sheet-menu-row.disabled .label {
+  -fx-text-fill: -wintak-disabled-text;
+}
+
+.sheet-menu-shortcut {
+  -fx-text-fill: -wintak-text-mute;
+  -fx-font-size: 10px;
+  -fx-font-family: "Consolas";
+}
+
+.sheet-menu-sep {
+  -fx-background-color: -wintak-border;
+  -fx-min-height: 1px;
+  -fx-max-height: 1px;
+}
+
+/* tooltip specimen (mirrors .tooltip, embeddable) */
+.sheet-tooltip-sample {
+  -fx-background-color: -wintak-border-strong, -wintak-bg;
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 3px;
+  -fx-text-fill: -wintak-text;
+  -fx-font-size: 11px;
+  -fx-padding: 5 9 5 9;
+  -fx-effect: dropshadow(gaussian, -wintak-shadow, 20, 0, 0, 6);
+}
+
+/* listview-row specimens */
+.sheet-list-row {
+  -fx-background-color: -wintak-border-strong, -wintak-surface-2;
+  -fx-background-insets: 0, 1;
+  -fx-text-fill: -wintak-text;
+  -fx-font-size: 11px;
+  -fx-padding: 7 9 7 9;
+}
+
+.sheet-list-row.hover {
+  -fx-background-color: -wintak-border-strong, -wintak-surface-raised;
+}
+
+.sheet-list-row.selected {
+  -fx-background-color: -wintak-accent-focus, -wintak-selection-tint;
+}
+
+/* modal dialog mock */
+.sheet-modal {
+  -fx-background-color: -wintak-border-strong, -wintak-surface-2;
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 3px;
+  -fx-effect: dropshadow(gaussian, -wintak-shadow, 18, 0, 8, 8);
+}
+
+.sheet-modal-title {
+  -fx-background-color: -wintak-maroon;
+  -fx-padding: 0 10 0 10;
+  -fx-min-height: 30px;
+  -fx-alignment: center-left;
+}
+
+.sheet-modal-title .label {
+  -fx-text-fill: -wintak-on-brand;
+  -fx-font-size: 12px;
+}
+
+.sheet-modal-body {
+  -fx-text-fill: -wintak-text-dim;
+  -fx-font-size: 12px;
+  -fx-padding: 16;
+}
+
+.sheet-modal-foot {
+  -fx-border-color: -wintak-border transparent transparent transparent;
+  -fx-padding: 12 16 12 16;
+  -fx-spacing: 8;
+  -fx-alignment: center-right;
+}

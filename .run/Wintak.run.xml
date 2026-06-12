@@ -1,0 +1,11 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Wintak" type="Application" factoryName="Application">
+    <!-- Launcher (plain main), NOT WintakApp: launching an Application subclass from the
+         classpath trips the JVM's "JavaFX runtime components are missing" check. -->
+    <option name="MAIN_CLASS_NAME" value="com.richardl.wintak.app.Launcher" />
+    <module name="wintak-app" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
